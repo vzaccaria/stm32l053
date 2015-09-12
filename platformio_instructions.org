@@ -38,4 +38,5 @@
 *** User Manual (board descriptions): [[http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105823.pdf][(pdf)]]
 *** [[http://docs.platformio.org/en/latest/platforms/ststm32.html][PackageIO STM32]] Packages and Frameworks
 
-** Arduino
+**** Expression boards
+***** [[http://www.st.com/web/catalog/tools/FM116/SC1248/PF261191][MEMS Inertial Nucleo Expansion]] - AKA X-NUCLEO-IKS01A1
