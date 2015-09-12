@@ -1,0 +1,41 @@
+* Installation of platform-io
+
+-  Install virtual env into an =env= directory
+
+   -  [[https://virtualenv.pypa.io/en/latest/userguide.html][link]]
+
+-  Install platform io
+
+   -  [[http://docs.platformio.org/en/latest/installation.html#python-package-manager][link]]
+
+* Initialize a project
+
+-  activate virtual env (=env/bin/activate=)
+
+   -  [[https://virtualenv.pypa.io/en/latest/userguide.html#activate-script][link]]
+
+-  find the board with =platformio boards=
+
+-  Create and cd into the project directory
+
+-  Initialize a new PlatformIO based project via =platformio init= command with
+   the pre-configured environments for your boards:
+
+   -  [[http://docs.platformio.org/en/latest/quickstart.html#quickstart][link]]
+   -  [[http://docs.platformio.org/en/latest/userguide/cmd_init.html#cmd-init][link]]
+
+-  Copy all .c/.h sources into the =src= directory
+
+* Running
+
+-  =cd project-directory= and =platformio run=
+
+* Board specific information
+
+** ST Nucleo L053R8
+
+*** Specs: https://developer.mbed.org/platforms/ST-Nucleo-L053R8/
+*** User Manual (board descriptions): [[http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105823.pdf][(pdf)]]
+*** [[http://docs.platformio.org/en/latest/platforms/ststm32.html][PackageIO STM32]] Packages and Frameworks
+
+** Arduino
