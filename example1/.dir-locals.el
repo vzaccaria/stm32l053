@@ -7,5 +7,7 @@
     "/Users/zaccaria/development/github/stm32l053/example1/.pioenvs/nucleo_l053r8/FrameworkMbedInc-1796756211"
     "/Users/zaccaria/development/github/stm32l053/example1/.pioenvs/nucleo_l053r8/FrameworkMbedInc91294382"
     "/Users/zaccaria/development/github/stm32l053/example1/lib/Nucleo_Sensor_Shield-57888ec40e75"
-    )
-  ))))
+    ))
+    (flycheck-gcc-language-standard . "c++11")
+    (flycheck-c/c++-gcc-executable . "/Users/zaccaria/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-g++")
+  )))
