@@ -5,8 +5,10 @@ L053R8](https://developer.mbed.org/platforms/ST-Nucleo-L053R8/) with a
 [X-NUCLEO-IKS01A1Motion](http://www.st.com/web/catalog/tools/FM116/SC1248/PF261191)
 MEMS and environmental sensor expansion board.
 
-It is based on demo and code found on the [ARM mbed
+It is based on the demo and code found on the [ARM mbed
 website](https://developer.mbed.org/teams/ST-Americas-mbed-Team/code/Nucleo_Sensor_Shield/).
+
+The whole build system is based on [Platform IO](http://platformio.org/#!/).
 
 Installation
 ============
