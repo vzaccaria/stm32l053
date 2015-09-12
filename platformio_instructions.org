@@ -1,3 +1,35 @@
+* Initialize a project
+
+-  activate virtual env (=source env/bin/activate=)
+-  =mkdir examplex=
+-  =cd examplex && platformio init -b nucleo_l053r8=
+-  edit =main.cpp=
+
+* Running
+
+-  =cd examplex= and =platformio run=
+
+* Board specific information
+
+** ST Nucleo L053R8
+
+*** Specs: https://developer.mbed.org/platforms/ST-Nucleo-L053R8/
+*** User Manual (board descriptions): [[http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105823.pdf][(pdf)]]
+
+*** Packages
+**** [[http://docs.platformio.org/en/latest/platforms/ststm32.html][PackageIO STM32]] Packages and Frameworks
+     + Arm MBED rtos
+       (looks like it as another CMSIS compilant rtos) - see [[https://developer.mbed.org/handbook/RTOS][(here)]].
+
+**** STMCube
+     + [[http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105262.pdf][Free RTOS]] getting started
+
+**** Shield specific
+     [[https://developer.mbed.org/teams/ST-Americas-mbed-Team/code/Nucleo_Sensor_Shield/][Nucleo Sensor Shield ]]
+
+*** Expression boards
+***** [[http://www.st.com/web/catalog/tools/FM116/SC1248/PF261191][MEMS Inertial Nucleo Expansion]] - AKA X-NUCLEO-IKS01A1
+
 * Installation of platform-io
 
 -  Install virtual env into an =env= directory
@@ -7,36 +39,3 @@
 -  Install platform io
 
    -  [[http://docs.platformio.org/en/latest/installation.html#python-package-manager][link]]
-
-* Initialize a project
-
--  activate virtual env (=env/bin/activate=)
-
-   -  [[https://virtualenv.pypa.io/en/latest/userguide.html#activate-script][link]]
-
--  find the board with =platformio boards=
-
--  Create and cd into the project directory
-
--  Initialize a new PlatformIO based project via =platformio init= command with
-   the pre-configured environments for your boards:
-
-   -  [[http://docs.platformio.org/en/latest/quickstart.html#quickstart][link]]
-   -  [[http://docs.platformio.org/en/latest/userguide/cmd_init.html#cmd-init][link]]
-
--  Copy all .c/.h sources into the =src= directory
-
-* Running
-
--  =cd project-directory= and =platformio run=
-
-* Board specific information
-
-** ST Nucleo L053R8
-
-*** Specs: https://developer.mbed.org/platforms/ST-Nucleo-L053R8/
-*** User Manual (board descriptions): [[http://www.st.com/st-web-ui/static/active/en/resource/technical/document/user_manual/DM00105823.pdf][(pdf)]]
-*** [[http://docs.platformio.org/en/latest/platforms/ststm32.html][PackageIO STM32]] Packages and Frameworks
-
-**** Expression boards
-***** [[http://www.st.com/web/catalog/tools/FM116/SC1248/PF261191][MEMS Inertial Nucleo Expansion]] - AKA X-NUCLEO-IKS01A1
