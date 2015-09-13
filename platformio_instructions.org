@@ -30,6 +30,10 @@
 *** Expression boards
 ***** [[http://www.st.com/web/catalog/tools/FM116/SC1248/PF261191][MEMS Inertial Nucleo Expansion]] - AKA X-NUCLEO-IKS01A1
 
+* Serial protocols
+** [[http://eli.thegreenplace.net/2011/08/02/length-prefix-framing-for-protocol-buffers][Length prefix framing]]
+** [[https://en.wikipedia.org/wiki/Magic_number_(programming)#Magic_numbers_in_protocols][Magic numbers in protocols (link)]]
+
 * Installation of platform-io
 
 -  Install virtual env into an =env= directory

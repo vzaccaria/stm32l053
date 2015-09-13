@@ -12,17 +12,36 @@ Serial pc(SERIAL_TX, SERIAL_RX);
 
 DigitalOut led1(LED2);
 
+union { unsigned char bytes[4]; uint32_t value; } o32_to_bytes;
+
+
 int main() {
 
     Thread thread([](void const *){
             uint8_t buf[PCT_BUF_SIZE];
 
             auto sendData = [&](const Pct *m) {
+
                 auto len = pct__get_packed_size(m);
                 pct__pack(m, buf);
-                for(uint i=0; i<len; i++) {
-                    pc.printf("%d", buf[i]);
-                }
+
+                auto sendHeader = [](uint32_t len) {
+                    o32_to_bytes.value = len;
+                    /* ;; magic sync word */
+                    pc.printf("VZ");
+                    for(uint i=0; i<4; i++) {
+                        pc.printf("%c", o32_to_bytes.bytes[i]);
+                    }
+                };
+
+                auto sendPayload = [](const unsigned char *buf, uint32_t len) {
+                    for(uint i=0; i<len; i++) {
+                        pc.printf("%c", buf[i]);
+                    }
+                };
+
+                sendHeader(len);
+                sendPayload(buf, len);
             };
 
             while (true) {
