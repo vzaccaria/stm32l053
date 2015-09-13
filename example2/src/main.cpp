@@ -1,17 +1,21 @@
 #include "mbed.h"
+
+/* Needed by RTOS when syntax checking through Emacs */
+#define TOOLCHAIN_GCC
 #include "rtos.h"
 
-D igitalOut led1(LED2);
-
-void led1_thread(void const *args) {
-    while (true) {
-        led1 = !led1;
-        Thread::wait(1000);
-    }
-}
+DigitalOut led1(LED2);
 
 int main() {
-    Thread thread(led1_thread);
+
+    Thread thread([](void const *){
+            while (true) {
+                led1 = !led1;
+                Thread::wait(200);
+            }
+        });
+
+
     while(true) {
     }
 }

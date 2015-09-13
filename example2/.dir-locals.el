@@ -8,5 +8,6 @@
     "/Users/zaccaria/development/github/stm32l053/example1/.pioenvs/nucleo_l053r8/FrameworkMbedInc91294382"
     "/Users/zaccaria/development/github/stm32l053/example1/lib/Nucleo_Sensor_Shield-57888ec40e75"
     "/Users/zaccaria/.platformio/packages/framework-mbed/libs/rtos"
+    "/Users/zaccaria/.platformio/packages/framework-mbed/libs/rtos/TARGET_CORTEX_M"
     ))
   )))

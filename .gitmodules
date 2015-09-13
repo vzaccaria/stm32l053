@@ -1,0 +1,3 @@
+[submodule "example2/tools/protobuf-c"]
+	path = example2/tools/protobuf-c
+	url = https://github.com/protobuf-c/protobuf-c.git

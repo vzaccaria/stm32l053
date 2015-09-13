@@ -1,0 +1,5 @@
+message pct {
+    required float temp = 1;
+    required float pressure = 2;
+    required float humidity = 3;
+}
