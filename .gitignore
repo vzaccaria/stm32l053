@@ -2,3 +2,5 @@ env
 example1/.pioenvs
 example1/.sconsign.dblite
 example1/src/main.cpp.blink
+example2/.pioenvs
+example2/.sconsign.dblite
