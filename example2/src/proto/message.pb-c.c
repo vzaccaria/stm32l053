@@ -53,36 +53,36 @@ void   pct__free_unpacked
 static const ProtobufCFieldDescriptor pct__field_descriptors[3] =
 {
   {
-    "temp",
+    "temp_value_C",
     1,
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_FLOAT,
     0,   /* quantifier_offset */
-    offsetof(Pct, temp),
+    offsetof(Pct, temp_value_c),
     NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "pressure",
+    "hum_value",
     2,
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_FLOAT,
     0,   /* quantifier_offset */
-    offsetof(Pct, pressure),
+    offsetof(Pct, hum_value),
     NULL,
     NULL,
     0,             /* flags */
     0,NULL,NULL    /* reserved1,reserved2, etc */
   },
   {
-    "humidity",
+    "pressure_value",
     3,
     PROTOBUF_C_LABEL_REQUIRED,
     PROTOBUF_C_TYPE_FLOAT,
     0,   /* quantifier_offset */
-    offsetof(Pct, humidity),
+    offsetof(Pct, pressure_value),
     NULL,
     NULL,
     0,             /* flags */
@@ -90,9 +90,9 @@ static const ProtobufCFieldDescriptor pct__field_descriptors[3] =
   },
 };
 static const unsigned pct__field_indices_by_name[] = {
-  2,   /* field[2] = humidity */
-  1,   /* field[1] = pressure */
-  0,   /* field[0] = temp */
+  1,   /* field[1] = hum_value */
+  2,   /* field[2] = pressure_value */
+  0,   /* field[0] = temp_value_C */
 };
 static const ProtobufCIntRange pct__number_ranges[1 + 1] =
 {

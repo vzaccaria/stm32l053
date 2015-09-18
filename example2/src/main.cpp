@@ -8,14 +8,22 @@
 /* We statically allocate the buffer in which to pack the message */
 #define PCT_BUF_SIZE 128
 
-Serial pc(SERIAL_TX, SERIAL_RX);
+/* Initialize sensor board */
+#include "x_cube_mems.h"
 
+volatile float temp_value_C;
+volatile float hum_value;
+volatile float pressure_value;
+
+static X_CUBE_MEMS *mems_expansion_board = X_CUBE_MEMS::Instance();
+
+Serial pc(SERIAL_TX, SERIAL_RX);
 DigitalOut led1(LED2);
 
 union { unsigned char bytes[4]; uint32_t value; } o32_to_bytes;
 
-
 int main() {
+
 
     Thread thread([](void const *){
             uint8_t buf[PCT_BUF_SIZE];
@@ -44,12 +52,23 @@ int main() {
                 sendPayload(buf, len);
             };
 
+            auto initSensors = [&]() {
+                mems_expansion_board->hts221.Power_ON();
+                mems_expansion_board->hts221.HTS221_Calibration();
+            };
+
+            auto getSensorValues = [&](Pct &m) {
+                mems_expansion_board->hts221.GetTemperature((float *)&m.temp_value_c);
+                mems_expansion_board->hts221.GetHumidity((float *)&m.hum_value);
+                mems_expansion_board->lps25h.GetPressure((float *)&m.pressure_value);
+            };
+
+            initSensors();
+
             while (true) {
                 led1 = !led1;
                 Pct m = PCT__INIT;
-                m.pressure = 0.3f;
-                m.temp = 52.0f;
-                m.humidity = 10.0f;
+                getSensorValues(m);
                 sendData(&m);
                 Thread::wait(200);
             }

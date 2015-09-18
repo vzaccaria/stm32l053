@@ -1,5 +1,5 @@
 message pct {
-    required float temp = 1;
-    required float pressure = 2;
-    required float humidity = 3;
+    required float temp_value_C = 1;
+    required float hum_value = 2;
+    required float pressure_value = 3;
 }

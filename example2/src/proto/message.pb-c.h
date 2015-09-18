@@ -26,9 +26,9 @@ typedef struct _Pct Pct;
 struct  _Pct
 {
   ProtobufCMessage base;
-  float temp;
-  float pressure;
-  float humidity;
+  float temp_value_c;
+  float hum_value;
+  float pressure_value;
 };
 #define PCT__INIT \
  { PROTOBUF_C_MESSAGE_INIT (&pct__descriptor) \

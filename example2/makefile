@@ -9,3 +9,6 @@ watch:
 # Install protoc from brew.
 src/proto/message.pb-c.c src/proto/message.pb-c.h: proto/message.proto
 		protoc-c --c_out=src proto/message.proto
+
+plot: all
+	DEBUG=* stm32-proxy proto/message.proto -p '/dev/cu.usbmodemfa133' -g $PWD/tools/plotly-stm32-proxy-plugin.js
