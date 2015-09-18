@@ -5,3 +5,4 @@ example1/src/main.cpp.blink
 example2/.pioenvs
 example2/.sconsign.dblite
 tools/plotly-config.json
+example2/tools/plotly-config.json

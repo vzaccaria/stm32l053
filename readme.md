@@ -32,3 +32,31 @@ Example 1
 
 Just a simple program to get T,H,P sensor values and print them on the
 serial port.
+
+commands:
+---------
+
+-   `make run` to compile and flash on the board
+-   `make watch` to watch data sent over the wire
+
+Example 2
+=========
+
+Plots realtime temperature on [plotly](https://plot.ly/). To enable plotting:
+
+1. you should create a `tools/plotly-config.json` with your plotly credentials:
+
+    ``` json
+    {
+        "user": "foo",
+        "apikey": "bar",
+        "token": "kookoo"
+    }
+    ```
+2. install the required modules with `npm install .`
+
+commands
+--------
+
+-   `make run` to compile and flash on the board
+-   `make plot` to plot data on plotly

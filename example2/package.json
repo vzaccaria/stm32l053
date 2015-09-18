@@ -6,7 +6,8 @@
   "dependencies": {
     "debug": "^2.2.0",
     "lodash": "^3.10.1",
-    "plotly": "^1.0.2"
+    "plotly": "^1.0.2",
+    "stm32-proxy": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {
