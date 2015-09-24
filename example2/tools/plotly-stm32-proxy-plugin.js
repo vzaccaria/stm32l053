@@ -6,33 +6,38 @@ var config = require(__dirname + '/plotly-config.json'),
 
 var debug = require('debug')('plotly-plugin')
 var _ = require('lodash')
+var $m = require('moment')
 
 
-// build a data object - see https://plot.ly/api/rest/docs for information
-var data = {
-    'x': [] // empty arrays since we will be streaming our data to into these arrays
-        ,
-    'y': [],
-    'type': 'scatter',
-    'mode': 'lines+markers',
-    marker: {
-        color: "rgba(31, 119, 180, 0.96)"
-    },
-    line: {
-        color: "rgba(31, 119, 180, 0.31)"
-    },
-    stream: {
-        "token": token,
-        "maxpoints": 100
+function initData(token) {
+    return {
+        'x': [],
+        'y': [],
+        'type': 'scatter',
+        'mode': 'lines+markers',
+        marker: {
+            color: "rgba(31, 119, 180, 0.96)"
+        },
+        line: {
+            color: "rgba(31, 119, 180, 0.31)"
+        },
+        stream: {
+            "token": token,
+            "maxpoints": 100
+        }
     }
 }
+// build a data object - see https://plot.ly/api/rest/docs for information
 
 // build you layout and file options
 var layout = {
     "filename": "streamSimpleSensor",
     "fileopt": "overwrite",
     "layout": {
-        "title": "streaming sensor data"
+        "title": "STM32 MEMS sensor data",
+        "yaxis": {
+            title: "temperature (C)"
+        }
     },
     "world_readable": true
 }
@@ -44,26 +49,40 @@ var layout = {
  */
 
 var plotlystream
+var data
 var i = 0
 
 
-
 function init() {
+    /* Build initialization object */
+    data = _.map(config.tokens, initData)
+
+    /* Initialize the library */
     Plotly.plot(data, layout, function(err, resp) {
         debug(resp)
-        if (err) return console.log("ERROR", err)
-        plotlystream = Plotly.stream(token, function() {})
+        if (err) {
+            return console.log("ERROR", err)
+        } else {
+            console.log(resp.url);
+        }
+
+        plotlystream = _.map(config.tokens, function(token) {
+            return Plotly.stream(token, function() {})
+        })
     })
 }
 
 function process(m) {
     if (!_.isUndefined(plotlystream)) {
-        var dta = {
-            x: i,
-            y: m.temp_value_C
-        }
-        var payload = JSON.stringify(dta) + '\n'
-        plotlystream.write(payload);
+        _.map(plotlystream, function(s) {
+            var datum = m.temp_value_C
+            var dta = {
+                x: $m().format('YYYY-MM-DD HH:mm:ss.SS'),
+                y: datum
+            }
+            var payload = JSON.stringify(dta) + '\n'
+            s.write(payload);
+        })
         i++;
     }
 }
