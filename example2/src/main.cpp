@@ -23,57 +23,50 @@ DigitalOut led1(LED2);
 union { unsigned char bytes[4]; uint32_t value; } o32_to_bytes;
 
 int main() {
+    uint8_t buf[PCT_BUF_SIZE];
 
+    auto sendData = [&](const Pct *m) {
 
-    Thread thread([](void const *){
-            uint8_t buf[PCT_BUF_SIZE];
+        auto len = pct__get_packed_size(m);
+        pct__pack(m, buf);
 
-            auto sendData = [&](const Pct *m) {
-
-                auto len = pct__get_packed_size(m);
-                pct__pack(m, buf);
-
-                auto sendHeader = [](uint32_t len) {
-                    o32_to_bytes.value = len;
-                    /* ;; magic sync word */
-                    pc.printf("VZ");
-                    for(uint i=0; i<4; i++) {
-                        pc.printf("%c", o32_to_bytes.bytes[i]);
-                    }
-                };
-
-                auto sendPayload = [](const unsigned char *buf, uint32_t len) {
-                    for(uint i=0; i<len; i++) {
-                        pc.printf("%c", buf[i]);
-                    }
-                };
-
-                sendHeader(len);
-                sendPayload(buf, len);
-            };
-
-            auto initSensors = [&]() {
-                mems_expansion_board->hts221.Power_ON();
-                mems_expansion_board->hts221.HTS221_Calibration();
-            };
-
-            auto getSensorValues = [&](Pct &m) {
-                mems_expansion_board->hts221.GetTemperature((float *)&m.temp_value_c);
-                mems_expansion_board->hts221.GetHumidity((float *)&m.hum_value);
-                mems_expansion_board->lps25h.GetPressure((float *)&m.pressure_value);
-            };
-
-            initSensors();
-
-            while (true) {
-                led1 = !led1;
-                Pct m = PCT__INIT;
-                getSensorValues(m);
-                sendData(&m);
-                Thread::wait(200);
+        auto sendHeader = [](uint32_t len) {
+            o32_to_bytes.value = len;
+            /* ;; magic sync word */
+            pc.printf("VZ");
+            for(uint i=0; i<4; i++) {
+                pc.printf("%c", o32_to_bytes.bytes[i]);
             }
-        });
+        };
 
-    while(true) {
+        auto sendPayload = [](const unsigned char *buf, uint32_t len) {
+            for(uint i=0; i<len; i++) {
+                pc.printf("%c", buf[i]);
+            }
+        };
+
+        sendHeader(len);
+        sendPayload(buf, len);
+    };
+
+    auto initSensors = [&]() {
+        mems_expansion_board->hts221.Power_ON();
+        mems_expansion_board->hts221.HTS221_Calibration();
+    };
+
+    auto getSensorValues = [&](Pct &m) {
+        mems_expansion_board->hts221.GetTemperature((float *)&m.temp_value_c);
+        mems_expansion_board->hts221.GetHumidity((float *)&m.hum_value);
+        mems_expansion_board->lps25h.GetPressure((float *)&m.pressure_value);
+    };
+
+    initSensors();
+
+    while (true) {
+        led1 = !led1;
+        Pct m = PCT__INIT;
+        getSensorValues(m);
+        sendData(&m);
+        Thread::wait(200);
     }
 }
