@@ -61,8 +61,11 @@ function init() {
     Plotly.plot(data, layout, function(err, resp) {
         debug(resp)
         if (err) {
-            return console.log("ERROR", err)
+            console.log("Something went wrong when connecting to plotly:");
+            console.log(err)
+            return;
         } else {
+            console.log("Connection established; you can watch the data stream here:");
             console.log(resp.url);
         }
 
